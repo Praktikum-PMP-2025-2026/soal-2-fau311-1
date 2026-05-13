@@ -23,15 +23,8 @@ int hitungPulau(int baris, int kolom){
     if(visit[baris][kolom] == 1 || grid[baris][kolom] == '0'){
         return 0;
     }
-    
     visit[baris][kolom] = 1; 
-    int ukuranPulau = 1; 
-    ukuranPulau = ukuranPulau + hitungPulau(baris - 1, kolom); 
-    ukuranPulau = ukuranPulau + hitungPulau(baris + 1, kolom); 
-    ukuranPulau = ukuranPulau + hitungPulau(baris, kolom - 1); 
-    ukuranPulau = ukuranPulau + hitungPulau(baris, kolom + 1);
-
-    return ukuranPulau;
+    return 1 + hitungPulau(baris - 1, kolom) + hitungPulau(baris + 1, kolom) + hitungPulau(baris, kolom - 1) + hitungPulau(baris, kolom + 1);
 }
 
 int main(){
@@ -39,14 +32,13 @@ int main(){
     for(int i = 0; i < R; i++){
         scanf("%s", &grid[i]);
     }
-
     int jumlahPulau = 0; 
     int ukuranPulau = 0;
     for(int i = 0; i < R; i++){
         for(int j = 0; j < C; j++){
-            if(visit[R][C] != 0 && grid[R][C] != '0'){ // telah visit dan grid 1
+            if(visit[i][j] == 0 && grid[i][j] == '1'){ // telah visit dan grid 1
                 jumlahPulau = jumlahPulau + 1;
-                int ukuran = hitungPulau(R,C);
+                int ukuran = hitungPulau(i,j);
                 if(ukuran > ukuranPulau){ 
                     ukuranPulau = ukuran;
                 }
@@ -63,5 +55,4 @@ int main(){
 Referensi : 
 https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/
 https://www.geeksforgeeks.org/c/multidimensional-arrays-in-c/
-
 */
